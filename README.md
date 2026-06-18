@@ -8,6 +8,9 @@ Ticket Classifier is a full-stack helpdesk system with:
 - Website-specific knowledge base crawling and indexing
 - Vector search to ground answers in your content
 
+
+
+
 ## Screenshots
 | Dashboard | Tickets |
 | --- | --- |
@@ -67,3 +70,4 @@ In the `dashboard-demo/` UI:
 
 ## References In AI Answers
 AI replies append a **References** section when sources are returned from the backend.
+
