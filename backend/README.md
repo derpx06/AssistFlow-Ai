@@ -1,64 +1,20 @@
-# Backend
+# FastAPI Backend (Port of backend/)
 
-## Setup (MongoDB)
-
-1. Install dependencies:
+## Setup
 
 ```bash
-cd backend
-npm install
-```
-
-2. Create env file:
-
-```bash
+cd backend_fastapi
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 cp .env.example .env
+uvicorn app.main:app --reload --host 0.0.0.0 --port 5001
 ```
 
-3. Set Mongo connection in `.env`:
-- `MONGODB_URI` (required)
-- `MONGODB_DB_NAME` (optional, defaults to `ticket_classifier`)
+API base: `http://127.0.0.1:5001/api`
 
-4. Initialize connection and indexes:
+## Notes
 
-```bash
-npm run db:setup
-```
-
-5. Start dev server:
-
-```bash
-npm run dev
-```
-
-API base URL: `http://127.0.0.1:5000/api` (or your `PORT`).
-
-## Tech Stack
-
-- Node.js + TypeScript
-- Express 5
-- MongoDB (`mongodb` driver)
-- JWT auth (`jsonwebtoken`)
-- Password hashing (`bcryptjs`)
-- Validation (`zod`)
-- Testing (`vitest`, `supertest`)
-
-## Folder Structure
-
-```text
-backend/
-├── src/
-│   ├── config/            # env + Mongo connection/index setup
-│   ├── controllers/       # auth and team endpoints
-│   ├── db/                # DB readiness helpers
-│   ├── middleware/        # auth/admin middleware
-│   ├── routes/            # API routing
-│   ├── schemas/           # zod schemas
-│   ├── types/             # shared TS types (Express auth context)
-│   ├── utils/             # DB setup/test + permission helpers
-│   ├── app.ts             # express app wiring
-│   └── index.ts           # server startup
-├── .env.example
-├── package.json
-└── tsconfig.json
-```
+- MongoDB collections and indexes are initialized at startup.
+- Socket.IO server is mounted at `/socket.io`.
+- Knowledge/vector search uses Qdrant and local deterministic embeddings fallback.
